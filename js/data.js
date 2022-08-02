@@ -69,10 +69,15 @@ const createComment = () => {
   };
 };
 
-const listOfComments = new Array();
-for (let i = 0; i <= getRandomNumber(Comments.MIN, Comments.MAX); i++) {
-  listOfComments.push(createComment());
+const createListOfComments = () => {
+  const listOfComments = new Array();
+  for (let i = 0; i <= getRandomNumber(Comments.MIN, Comments.MAX); i++) {
+    listOfComments.push(createComment());
+  }
+
+  return listOfComments;
 }
+
 
 // создание коллекции фотографий
 
@@ -84,7 +89,7 @@ const createPhotoAlbum = () => {
       url: 'photos/'+ i +'.jpg',
       description: getRandomArrayElement(DESCRIPTIONS),
       likes: getRandomNumber(Likes.MIN, Likes.MAX),
-      comments: listOfComments,
+      comments: createListOfComments(),
     });
   }
 
