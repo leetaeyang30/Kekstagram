@@ -1,6 +1,6 @@
-import {getRandomNumber} from './util.js';
+import {getRandomNumber, getRandomArrayElement} from './util.js';
 
-const  PHOTO_QTY = 25;
+const  PHOTO_QUANTITY = 25;
 
 const COMMENT_TEMPLATES = [
   'Всё отлично!',
@@ -45,10 +45,6 @@ const IdComments = {
 
 // генерация комментариев
 
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomNumber(0, elements.length - 1)];
-};
-
 let commentsId = [];
 
 const getCommentId = () => {
@@ -63,14 +59,14 @@ const getCommentId = () => {
 const createComment = () => {
   return {
     id: getCommentId(),
-    avatar: 'img/avatar-'+ getRandomNumber(Comments.MIN, Comments.MAX) +'.svg',
+    avatar: 'img/avatar-' + getRandomNumber(Comments.MIN, Comments.MAX) + '.svg',
     message: getRandomArrayElement(COMMENT_TEMPLATES),
     name: getRandomArrayElement(NAMES),
   };
 };
 
 const createListOfComments = () => {
-  const listOfComments = new Array();
+  const listOfComments = [];
   for (let i = 0; i <= getRandomNumber(Comments.MIN, Comments.MAX); i++) {
     listOfComments.push(createComment());
   }
@@ -83,10 +79,10 @@ const createListOfComments = () => {
 
 const createPhotoAlbum = () => {
   let album = [];
-  for (let i = 1; i <= PHOTO_QTY; i++) {
+  for (let i = 1; i <= PHOTO_QUANTITY; i++) {
     album.push({
       id: i,
-      url: 'photos/'+ i +'.jpg',
+      url: 'photos/' + i + '.jpg',
       description: getRandomArrayElement(DESCRIPTIONS),
       likes: getRandomNumber(Likes.MIN, Likes.MAX),
       comments: createListOfComments(),

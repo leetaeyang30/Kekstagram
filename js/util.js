@@ -10,18 +10,26 @@ const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const checkMaxLength = (string, maxLength) => {
-  let stringLength = string.trim().length;
-
-  return stringLength <= maxLength;
+const getRandomArrayElement = (elements) => {
+  return elements[getRandomNumber(0, elements.length - 1)];
 };
 
+const checkMaxLength = (string, maxLength) => {
+  return string.trim().length <= maxLength;
+};
+
+const Keys = {
+  ESC: 'Esc',
+  ESCAPE: 'Escape',
+}
+
 const isEscEvent = (evt) => {
-  return evt.key === 'Escape' || evt.key === 'Esc';
+  return evt.key === Keys.ESC || evt.key === Keys.ESCAPE;
 };
 
 export {
   getRandomNumber,
+  getRandomArrayElement,
   checkMaxLength,
   isEscEvent
 }
