@@ -87,28 +87,30 @@ const setRangeSetting = (effect) => {
 };
 
 const setFilter = (filterName, level) => {
+  if (filterName === 'none') {
+    imagePreview.style.filter = '';
+    return;
+  }
+
   imagePreview.style.filter = `${Effects[filterName].FILTER}(${level}${Effects[filterName].MEASURE})`;
 };
 
-effectsGallery.forEach((effect) => {
-  rangeSlider.noUiSlider.on('update', (values, handle) => {
-    effectLevelInput.value = values[handle];
-    // setFilter(effect.value, effectLevelInput.value);
-    // если расскоментировать, то фотка не грузится
-  });
-
+for (let effect of effectsGallery) {
   effect.addEventListener('change', () => {
     imagePreview.className = `effects__preview--${effect.value}`;
-    if (effect === 'none') {
+    if (effect.value === 'none') {
       resetEffect();
     } else {
       rangeElement.classList.remove('hidden');
       setRangeSetting(effect);
       effectLevelInput.setAttribute('step', Effects[effect.value].STEP);
-      // раньше setFilter был тут -.-
     }
+    rangeSlider.noUiSlider.on('update', (values, handle) => {
+      effectLevelInput.value = values[handle];
+      setFilter(effect.value, effectLevelInput.value);
+    });
   });
-});
+}
 
 export {
   resetEffect
