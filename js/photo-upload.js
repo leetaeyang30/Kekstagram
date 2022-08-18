@@ -1,5 +1,6 @@
 import { isEscEvent } from './util.js';
 import { resetEffect } from './effects.js';
+import { hashtagInput } from './validation.js';
 
 const Scale = {
   STEP: 25,
@@ -28,6 +29,7 @@ const openEdition = ()=>{
   scaleInput.value = Scale.INITIAL;
   resetEffect();
   imagePreview.style.transform = `scale(${Scale.MAX/100})`;
+  hashtagInput.focus();
 
   document.addEventListener('keydown', onEditionEscKeydown);
 };

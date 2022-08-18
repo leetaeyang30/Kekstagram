@@ -46,7 +46,7 @@ const rangeElement = document.querySelector('.img-upload__effect-level');
 
 // создание ползунка
 
-window.noUiSlider.create(rangeSlider, {
+noUiSlider.create(rangeSlider, {
   range: {
     min: 0,
     max: 1,
