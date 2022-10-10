@@ -67,5 +67,6 @@ cancelButton.addEventListener('click', closeFullPhoto);
 
 export {
   openFullPhoto,
-  renderPhoto
+  renderPhoto,
+  closeFullPhoto
 };
