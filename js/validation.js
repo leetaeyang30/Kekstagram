@@ -1,7 +1,7 @@
 import {checkMaxLength, isEscEvent} from './util.js';
 
 const MAX_COMMENT_LENGTH = 140;
-const PATTERN = /#[0-9A-Za-zА-Яа-яё]+/g;
+const PATTERN = /^#[^ !@#$%^&*(),.?":{}|<>_]*$/;
 
 const HashtagSettings = {
   HASHTAGS_AMOUNT: 5,
@@ -20,7 +20,16 @@ const preventExit = (evt) => {
 }
 
 hashtagInput.addEventListener('input', () => {
-  let hashtags = hashtagInput.value.toLowerCase().trim().split(' ');
+  hashtagInput.setCustomValidity('');
+  hashtagInput.style.border = '';
+
+  const hashtagValue = hashtagInput.value;
+
+  if (!hashtagValue) {
+    return;
+  }
+
+  const hashtags = hashtagInput.value.toLowerCase().trim().split(' ');
 
   if (hashtags.length - 1 >= HashtagSettings.HASHTAGS_AMOUNT) {
     hashtagInput.setCustomValidity('Не более 5 хэштегов.');
@@ -79,4 +88,4 @@ commentField.addEventListener('input', ()=> {
 
 commentField.addEventListener('keydown', preventExit);
 
-export {hashtagInput};
+export {hashtagInput, commentField};
