@@ -1306,6 +1306,36 @@ main {
   opacity: 0.6;
 }
 
+/*
+ * Блок ошибки вызова сервера
+ */
+
+.server-error {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Impact', 'Arial' sans-serif;
+  font-size: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: rgba(14, 10, 5, 0.7);
+  border-radius: 3%;
+  transform: translate(-50%);
+}
+
+.server-error::after {
+  content: "";
+  width: 60px;
+  height: 60px;
+  background: url("../img/error.png") no-repeat center;
+  background-size: contain;
+}
 
 /**
  * Экран загрузки изображения

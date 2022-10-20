@@ -75,3 +75,5 @@ biggerScaleControl.addEventListener('click', () =>{
   scaleInput.value = scaleValue + '%';
   imagePreview.style.transform = `scale(${scaleValue/100})`
 });
+
+export {openEdition, closeEdition}
