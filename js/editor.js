@@ -1,6 +1,8 @@
 import { isEscEvent } from './util.js';
 import { resetEffect } from './effects.js';
-import { hashtagInput } from './validation.js';
+import { hashtagInput, commentField } from './validation.js';
+import { sendData } from './api.js';
+
 
 const Scale = {
   STEP: 25,
@@ -76,4 +78,24 @@ biggerScaleControl.addEventListener('click', () =>{
   imagePreview.style.transform = `scale(${scaleValue/100})`
 });
 
-export {openEdition, closeEdition}
+// Закрытие формы
+
+const uploadForm = document.querySelector('.img-upload__form');
+
+const setFormSubmit = (success, fail) => {
+  uploadForm.addEventListener('submit', (evt)=> {
+    evt.preventDefault();
+    sendData(
+      new FormData(evt.target),
+      success,
+      fail,
+    );
+    closeEdition();
+    imagePreview.removeAttribute('class');
+    resetEffect();
+    hashtagInput.value = '';
+    commentField.value = '';
+  })
+}
+
+export {setFormSubmit}

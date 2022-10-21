@@ -113,6 +113,5 @@ for (let effect of effectsGallery) {
 }
 
 export {
-  resetEffect,
-  imagePreview
+  resetEffect
 };

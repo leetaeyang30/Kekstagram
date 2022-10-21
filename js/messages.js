@@ -1,10 +1,5 @@
-import { formSubmit } from './fetch.js';
 import { isEscEvent } from './util.js';
-import { closeEdition } from './editor.js';
-import { resetEffect, imagePreview } from './effects.js';
-import { hashtagInput, commentField } from './validation.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const body = document.querySelector('body');
@@ -19,11 +14,11 @@ const closeEscNotification = (notification) => {
 }
 
 const closeClickNotification = (notification) => {
-  document.onclick = (evt) => {
-    if (evt.target.className != notification) {
-      body.removeChild(notification);
+  document.addEventListener('click', (evt) => {
+    if (evt.target.className != notification.className) {
+      notification.remove();
     }
-  }
+  })
 }
 
 const onSuccess = () => {
@@ -54,14 +49,16 @@ const onError = () => {
   closeClickNotification(errorNotification);
 }
 
-uploadForm.addEventListener('submit', (evt)=> {
-  evt.preventDefault();
-  formSubmit(uploadForm);
-  closeEdition();
-  imagePreview.removeAttribute('class');
-  resetEffect();
-  hashtagInput.value = '';
-  commentField.value = '';
-})
+const serverError = () => {
+  let container = document.createElement('div');
+  container.classList.add('server-error');
+  let title = document.createElement('h2');
+  container.appendChild(title);
+  title.textContent = 'Ошибка сервера. Повторите позднее.';
+  document.body.appendChild(container);
+}
 
-export {onSuccess, onError}
+export {
+  onSuccess,
+  onError,
+  serverError}

@@ -27,19 +27,11 @@ const isEscEvent = (evt) => {
   return evt.key === Keys.ESC || evt.key === Keys.ESCAPE;
 };
 
-const serverError = () => {
-  let container = document.createElement('div');
-  container.classList.add('server-error');
-  let title = document.createElement('h2');
-  container.appendChild(title);
-  title.textContent = 'Ошибка сервера. Повторите позднее.';
-  document.body.appendChild(container);
-}
+
 
 export {
   getRandomNumber,
   getRandomArrayElement,
   checkMaxLength,
-  isEscEvent,
-  serverError
+  isEscEvent
 }
