@@ -6,10 +6,14 @@ import {getData} from './api.js'
 import {setFormSubmit} from './editor.js';
 import {onSuccess, onError, serverError} from './messages.js'
 
-
-getData(usersPhotos, serverError);
+getData(
+  (pictures) => usersPhotos(pictures),
+  serverError,
+);
 
 setFormSubmit(
   () => onSuccess(),
   () => onError(),
 );
+
+

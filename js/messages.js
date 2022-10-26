@@ -15,8 +15,8 @@ const closeEscNotification = (notification) => {
 
 const closeClickNotification = (notification) => {
   document.addEventListener('click', (evt) => {
-    if (evt.target.className != notification.className) {
-      notification.remove();
+    if (evt.target.className === notification.className && body.contains(notification)) {
+      body.removeChild(notification);
     }
   })
 }
