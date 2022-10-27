@@ -1,5 +1,4 @@
 import { openFullPhoto, renderPhoto } from './full-photo.js';
-import { showFilters } from './filter.js';
 
 
 const userPictureList = document.querySelector('.pictures');
@@ -7,7 +6,7 @@ const userPictureTemplate = document.querySelector('#picture').content.querySele
 
 //  Отрисовка фотографий пользователей
 
-const usersPhotos = (users) => {
+const renderUsersPhotos = (users) => {
 
   const userPicturesFragment = document.createDocumentFragment();
 
@@ -26,9 +25,14 @@ const usersPhotos = (users) => {
     });
 
   userPictureList.appendChild(userPicturesFragment);
-
-  showFilters();
 }
 
-export {usersPhotos};
+const clearUsersPhotos = () => {
+  const photos = document.querySelectorAll('.picture');
+  photos.forEach((photo) => {
+    photo.remove();
+  });
+}
+
+export {renderUsersPhotos, clearUsersPhotos};
 

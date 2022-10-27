@@ -1,15 +1,12 @@
-// import { userPhotoData } from './main.js';
-// import { getRandomArrayElement } from './util';
+import {shuffle} from './util.js';
 
 const ACTIVE_FILTER_BUTTON = 'img-filters__button--active';
-// const NUMBER_OF_RANDOM = 10;
-// const DEBOUNCE_TIMER = 500;
+const AMOUNT_OF_RANDOM = 10;
+const DEBOUNCE_DELAY = 500;
 
 const filterSection = document.querySelector('.img-filters');
 const filterButtons = document.getElementById('filter-buttons');
-const defaultFilter = document.querySelector('#filter-default');
-const randomtFilter = document.querySelector('#filter-random');
-const discussedFilter = document.querySelector('#filter-discussed');
+
 
 // показать секцию фильтров
 
@@ -26,31 +23,42 @@ const resetActiveFilter = () => {
 
 // отбор фотографий
 const filterModes = {
-  'default': console.log('hop'),
-  'random': console.log('hey'),
-  'discussed': console.log('lala ley'),
+  'filter-default': (pictures) => pictures,
+  'filter-random': (pictures) => {
+    const copy = pictures.slice();
+    return shuffle(copy).slice(0, AMOUNT_OF_RANDOM);
+  },
+  'filter-discussed': (pictures) => {
+    const photos = pictures.slice();
+    const compareComments = (photoA, photoB) => {
+      return photoB.comments.length - photoA.comments.length;
+    }
+    return photos.sort(compareComments);
+
+  },
 }
 
-// const clearUsersPhotos = () => {
+const sortPhotos = _.debounce((clear, render, pictures, mode) => {
+  clear();
+  const sortFunction = filterModes[mode];
+  render(sortFunction(pictures));
+}, DEBOUNCE_DELAY);
 
-// }
+// переключатель сортировки
 
-
-// переключатель фильтров
-
-filterButtons.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains(ACTIVE_FILTER_BUTTON)) {
-    return;
-  }
-  resetActiveFilter();
-  evt.target.classList.add(ACTIVE_FILTER_BUTTON);
-
-  // if(evt.target === defaultFilter) FILTERS_MODES.default;
-  // if(evt.target === randomFilter) FILTERS_MODES.random;
-  // if(evt.target === discussedFilter) FILTERS_MODES.discussed;
-})
+const onSortClick = (pictures, render, clear) => {
+  filterButtons.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains(ACTIVE_FILTER_BUTTON)) {
+      return;
+    }
+    resetActiveFilter();
+    evt.target.classList.add(ACTIVE_FILTER_BUTTON);
+    let id = evt.target.id;
+    sortPhotos(clear, render, pictures, id);
+  })
+}
 
 
 
 
-export {showFilters};
+export {showFilters, onSortClick};

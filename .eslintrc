@@ -13,3 +13,4 @@ extends:
 
 "globals":
     "noUiSlider": true
+    "_": true
