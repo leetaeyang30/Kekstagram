@@ -20,8 +20,6 @@ const preventExit = (evt) => {
 }
 
 hashtagInput.addEventListener('input', () => {
-  hashtagInput.setCustomValidity('');
-  hashtagInput.style.border = '';
 
   const hashtagValue = hashtagInput.value;
 
@@ -30,12 +28,6 @@ hashtagInput.addEventListener('input', () => {
   }
 
   const hashtags = hashtagInput.value.toLowerCase().trim().split(' ');
-
-  if (hashtags.length - 1 >= HashtagSettings.HASHTAGS_AMOUNT) {
-    hashtagInput.setCustomValidity('Не более 5 хэштегов.');
-    hashtagInput.style.border = '2px solid red';
-  }
-
 
   for (const hashtag of hashtags) {
 
@@ -58,6 +50,10 @@ hashtagInput.addEventListener('input', () => {
     }
   }
 
+  if (hashtags.length-1 >= HashtagSettings.HASHTAGS_AMOUNT) {
+    hashtagInput.setCustomValidity('Не более 5 хэштегов.');
+    hashtagInput.style.border = '2px solid red';
+  }
 
   for(let i = 0; i < hashtags.length; i++) {
     for (let j = i +1 ; j < hashtags.length; j++) {
