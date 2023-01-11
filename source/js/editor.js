@@ -1,5 +1,5 @@
 import { isEscEvent } from './util.js';
-import { resetEffect } from './effects.js';
+import { resetEffect} from './effects.js';
 import { hashtagInput, commentField } from './validation.js';
 import { sendData } from './api.js';
 

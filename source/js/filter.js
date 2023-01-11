@@ -1,4 +1,5 @@
 import {shuffle} from './util.js';
+import _ from 'lodash';
 
 const ACTIVE_FILTER_BUTTON = 'img-filters__button--active';
 const AMOUNT_OF_RANDOM = 10;
