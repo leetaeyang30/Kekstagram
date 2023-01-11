@@ -1,4 +1,5 @@
 import './editor.js';
+import './data.js';
 import './effects.js';
 import './validation.js';
 import {renderUsersPhotos, clearUsersPhotos} from './pictures.js';
